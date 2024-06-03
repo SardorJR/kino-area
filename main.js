@@ -1,3 +1,7 @@
+import{
+    createHeader
+} from './modules/ui.js'
+
 var movieScroll = document.getElementById("movie_scroll");
 var scrollMovie = document.querySelector(".scroll_movie");
 
@@ -43,8 +47,13 @@ scrollMovie.addEventListener("scroll", function () {
 //     `
 //   }
 // }
-let audio2 = new Audio('/img/povezlo-povezlo.mp3')
-let audio = new Audio('/img/o-privet.mp3')
+// let audio2 = new Audio('/img/povezlo-povezlo.mp3')
+// let audio = new Audio('/img/o-privet.mp3')
+
+let orig_header=document.querySelector('.orig')
+createHeader(orig_header)
+
+
 const grid = document.querySelector('.grid')
 let scroll_movie = document.querySelector('.scroll_movie')
 let iframe = document.querySelector('iframe')
@@ -68,8 +77,9 @@ function reload_now(arr, place) {
         // console.log(item);
         place.insertAdjacentHTML('beforeend', `
       <div class="item">
+     
         <img class='a' src="https://image.tmdb.org/t/p/original${item.poster_path}" alt="">
-        <span>${item.title}</span>
+        <a class='movie' href='/pages/movie/?id=${item.id}'>${item.title}</a>
         <p>Боевик</p>
       </div>
 
@@ -78,14 +88,15 @@ function reload_now(arr, place) {
     }
 
     let item = document.querySelectorAll('.a');
-    console.log(item);
     item.forEach(i => {
-        i.onclick = () => {
-            console.log(i);
+        i.onmouseenter = () => {
             body.style.backgroundImage = `url(${i.src})`;
         }
     });
+
+
 }
+
 
 
 
