@@ -1,4 +1,4 @@
-import{
+import {
     createHeader
 } from './modules/ui.js'
 
@@ -50,7 +50,7 @@ scrollMovie.addEventListener("scroll", function () {
 // let audio2 = new Audio('/img/povezlo-povezlo.mp3')
 // let audio = new Audio('/img/o-privet.mp3')
 
-let orig_header=document.querySelector('.orig')
+let orig_header = document.querySelector('.orig')
 createHeader(orig_header)
 
 
@@ -180,20 +180,20 @@ fetch('https://api.themoviedb.org/3/movie/popular', {
     .then(res => res.json())
 
     .then(res => {
-        rel_popular(res.results.slice(0, 4), grid_2)
+        reload_now(res.results.slice(0, 4), grid_2)
     })
-function rel_popular(arr, place) {
-    place.innerHTML = ''
-    for (let item of arr) {
-        place.insertAdjacentHTML('beforeend', `
-    <div class="item">
-            <img src="https://image.tmdb.org/t/p/original${item.poster_path}" alt="">
-            <span>${item.title}</span>
-            <p>Триллер</p>
-          </div>
-    `)
-    }
-}
+// function rel_popular(arr, place) {
+//     place.innerHTML = ''
+//     for (let item of arr) {
+//         place.insertAdjacentHTML('beforeend', `
+//     <div class="item">
+//             <img src="https://image.tmdb.org/t/p/original${item.poster_path}" alt="">
+//             <span>${item.title}</span>
+//             <p>Триллер</p>
+//           </div>
+//     `)
+//     }
+// }
 const links = document.querySelectorAll('.active');
 
 links.forEach(link => {
@@ -237,16 +237,20 @@ let number = 3
 function Info(arr, place) {
     for (let item of arr) {
         place.insertAdjacentHTML('beforeend', `
-        <div class="elem_2">
-            <div class="el">
-            <h3>${item.name}</h3>
-            <span>Quentin Tarantino</span>
-            <p>57 лет</p>
-            </div>
+        <a class="elem_2" href=/pages/actor/index.html?id=${item.id}>
+        
+            
+                <div class="el">
+                    <h3>${item.name}</h3>
+                    <span>Quentin Tarantino</span>
+                    <p>57 лет</p>
+                </div>
+            
             <p class="yel-father"><span class="yel">${number++} -е место<span/></p>
-        </div>
+            </a>
     `)
     }
+
 }
 let num = 1
 
