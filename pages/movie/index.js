@@ -1,6 +1,10 @@
 import {
-    createHeader
+    createHeader,
+    createFooter
 } from '../../modules/ui.js'
+
+let footer=document.querySelector('footer')
+createFooter(footer)
 const id = location.search.split('=').at(-1)
 
 fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, {
@@ -128,7 +132,7 @@ fetch(`https://api.themoviedb.org/3/movie/${id}?language=ru-RU`, {
         </div>
         <h3>${res.overview.slice(0, 200) + '...'}</h3>
             `
-
+            console.log(res.vote_average);
         const data = {
             labels: [
 
@@ -147,12 +151,66 @@ fetch(`https://api.themoviedb.org/3/movie/${id}?language=ru-RU`, {
             type: 'doughnut',
             data: data,
         };
+        const data2 = {
+            labels: [
+
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+                
+                data: [res.vote_average],
+                backgroundColor: [
+                    '#4BCB36'
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        const config2 = {
+            type: 'doughnut',
+            data: data2,
+        };
         const ctx = document.getElementById('myChart').getContext('2d');
         const c = document.querySelector('#myhart')
         new Chart(c, config)
-        new Chart(ctx, config);
+        new Chart(ctx, config2);
     }
     )
+let place_el = document.querySelector('.glavv')
+let imgs = document.querySelector('.imgs')
+fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=ru-RU`, {
+    headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODAzYWUxZGEwOGU3M2RmM2ZjMTI2OGMzNTE2NWNjMiIsInN1YiI6IjY0MjdlZWY4OGE4OGIyMDBkNTMyOGQ1MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8WByVMOVhx2M7eo1SLPb3cPkt2NSfzLg53Afm1_dr-M`
+    }
+})
+    .then(res => res.json())
+    .then(creditsData => {
+        imgs.onclick=()=>{
+            const mainRoles = creditsData.cast;
+            mainRoles.forEach(role => {
+                place_el.innerHTML += `
+            <div class="elemm">
+              <img src='https://image.tmdb.org/t/p/w500${role.profile_path}' alt="">
+              <h3>${role.name}</h3>
+              <h4>${role.original_name}</h4>
+              <a href="#">${role.character}</a>
+             </div>
+              `   
+            });
+        }
+        const mainRoles = creditsData.cast.slice(0, 8);
+        mainRoles.forEach(role => {
+            place_el.innerHTML += `
+        <div class="elemm">
+          <img src='https://image.tmdb.org/t/p/w500${role.profile_path}' alt="">
+          <h3>${role.name}</h3>
+          <h4>${role.original_name}</h4>
+          <a href="/pages/actor/index.html?id=${role.id}">${role.character}</a>
+         </div>
+          `
+
+        });
+    })
 
 let header = document.querySelector('header')
 createHeader(header)
@@ -208,7 +266,7 @@ createHeader(header)
 
 //     })
 //     .catch(error => console.error("Произошла ошибка:", error));
-let iframe=document.querySelector('iframe')
+let iframe = document.querySelector('iframe')
 fetch(`https://api.themoviedb.org/3/movie/${id}/videos`, {
     headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODAzYWUxZGEwOGU3M2RmM2ZjMTI2OGMzNTE2NWNjMiIsInN1YiI6IjY0MjdlZWY4OGE4OGIyMDBkNTMyOGQ1MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8WByVMOVhx2M7eo1SLPb3cPkt2NSfzLg53Afm1_dr-M`
@@ -217,6 +275,6 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/videos`, {
     .then(res => res.json())
     .then(res => {
         const trailer = res.results.find(item => item.type === 'Trailer')
-        iframe.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1`
+        iframe.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=0`
         // nam.innerHTML = item.title
     })

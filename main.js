@@ -1,7 +1,9 @@
 import {
-    createHeader
+    createHeader,
+    createFooter
 } from './modules/ui.js'
-
+let footer=document.querySelector('footer')
+createFooter(footer)
 var movieScroll = document.getElementById("movie_scroll");
 var scrollMovie = document.querySelector(".scroll_movie");
 
@@ -59,6 +61,7 @@ let scroll_movie = document.querySelector('.scroll_movie')
 let iframe = document.querySelector('iframe')
 let showAll = false;
 let body = document.body
+let grids = document.querySelector('.grids')
 fetch('https://api.themoviedb.org/3/movie/now_playing', {
     headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODAzYWUxZGEwOGU3M2RmM2ZjMTI2OGMzNTE2NWNjMiIsInN1YiI6IjY0MjdlZWY4OGE4OGIyMDBkNTMyOGQ1MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8WByVMOVhx2M7eo1SLPb3cPkt2NSfzLg53Afm1_dr-M`
@@ -66,10 +69,22 @@ fetch('https://api.themoviedb.org/3/movie/now_playing', {
 })
     .then(res => res.json())
     .then(res => {
-
+     
         reload_2(res.results, scroll_movie, iframe);
         reload_now(res.results.slice(0, 8), grid);
+       
+
     })
+fetch('https://api.themoviedb.org/3/movie/upcoming?language=ru-RU', {
+    headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODAzYWUxZGEwOGU3M2RmM2ZjMTI2OGMzNTE2NWNjMiIsInN1YiI6IjY0MjdlZWY4OGE4OGIyMDBkNTMyOGQ1MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8WByVMOVhx2M7eo1SLPb3cPkt2NSfzLg53Afm1_dr-M`
+    }
+})
+    .then(res => res.json())
+    .then(res => {
+        reload_now(res.results.slice(0,4), grids);
+    })
+
 
 function reload_now(arr, place) {
     place.innerHTML = ''
@@ -137,6 +152,7 @@ function reload_2(arr, place, iframe) {
 
         const img = document.createElement('img');
         img.src = '/img/Polygon 2 (1).png';
+        img.classList.add('scale')
         img.alt = '';
 
         const span = document.createElement('span');
@@ -259,14 +275,14 @@ function relPath(arr, place) {
     for (let item of arr) {
         // console.log(item);
         place.insertAdjacentHTML('beforeend', `
-    <div class="elem" style="background-image: url(https://image.tmdb.org/t/p/original${item.profile_path});">
+    <a href="/pages/actor/index.html?id=${item.id}" class="elem" style="background-image: url(https://image.tmdb.org/t/p/original${item.profile_path});">
     <p><b>${num++}<b/>-е место</p>
     <div class="dannie">
       <h3>${item.name}</h3>
       <span>${item.known_for[0].name}</span>
       <p>57 лет</p>
     </div>
-  </div>
+  </a>
     `)
     }
 }

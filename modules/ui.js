@@ -21,3 +21,19 @@ export function createHeader(place){
   </div>
     `
 }
+
+export function createFooter(place){
+  place.innerHTML+=`
+  <img src="/public/img/Логотип (1).png" alt="">
+        <h2>Подпишитесь на E-mail рассылку</h2>
+        <h3>Если хотиет быть в курсе последних новостей и новинок кино - заполните форму ниже и оформите бесплатную E-mail рассылку!</h3>
+        <div class="inputs">
+          <input type="search" placeholder="Введите свой E-mail адрес">
+          <button>Подписаться</button>
+        </div>
+        <div class="switch">
+          <input type="checkbox">
+          <span>Соглашаюсь на условия <a href="#">политики конфиденциальности</a></span>
+        </div>
+  `
+}
