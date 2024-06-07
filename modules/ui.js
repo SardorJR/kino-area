@@ -24,7 +24,8 @@ export function createHeader(place){
 
 export function createFooter(place){
   place.innerHTML+=`
-  <img src="/public/img/Логотип (1).png" alt="">
+  <footer>
+        <img src="/public/img/Логотип (1).png" alt="">
         <h2>Подпишитесь на E-mail рассылку</h2>
         <h3>Если хотиет быть в курсе последних новостей и новинок кино - заполните форму ниже и оформите бесплатную E-mail рассылку!</h3>
         <div class="inputs">
@@ -35,5 +36,19 @@ export function createFooter(place){
           <input type="checkbox">
           <span>Соглашаюсь на условия <a href="#">политики конфиденциальности</a></span>
         </div>
+      </footer>
+      <div class="foot">
+        <img src="/public/img/    .png" alt="">
+        <div class="a_href">
+          <a href="#">Афиша</a>
+          <a href="#">Новости</a>
+          <a href="#">Персоны</a>
+          <a href="#">Рейтинг</a>
+          <a href="#">Рецензии</a>
+          <a href="#">Каталог фильмов</a>
+        </div>
+        <p>2020 © Kinoarea.  Все права защищены</p>
+        <a href="#">Политика конфиденциальности</a>
+      </div>
   `
 }

@@ -2,7 +2,7 @@ import {
     createHeader,
     createFooter
 } from '../../modules/ui.js'
-let footer=document.querySelector('footer')
+let footer=document.querySelector('.footers')
 createFooter(footer)
 let grid_2 = document.querySelector('.grid_22')
 let id = location.search.split('=').at(-1)

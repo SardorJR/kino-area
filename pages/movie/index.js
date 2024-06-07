@@ -3,7 +3,7 @@ import {
     createFooter
 } from '../../modules/ui.js'
 
-let footer=document.querySelector('footer')
+let footer=document.querySelector('.footers')
 createFooter(footer)
 const id = location.search.split('=').at(-1)
 
@@ -110,12 +110,31 @@ fetch(`https://api.themoviedb.org/3/movie/${id}?language=ru-RU`, {
 })
     .then(res => res.json())
     .then(res => {
-        console.log(res);
-        const body = document.querySelector('body')
-        body.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${res.backdrop_path})`
-        let left_box_img = document.querySelector('.left_box')
-        left_box_img.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${res.poster_path})`
-        let place = document.querySelector('.gig')
+        if (res.backdrop_path) {
+            console.log(`Backdrop path: https://image.tmdb.org/t/p/original${res.backdrop_path}`);
+            document.body.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${res.backdrop_path})`;
+        } else {
+            console.error('Backdrop path is missing');
+        }
+    
+        if (res.poster_path) {
+            console.log(`Poster path: https://image.tmdb.org/t/p/original${res.poster_path}`);
+            let left_box_img = document.querySelector('.left_box');
+            if (left_box_img) {
+                left_box_img.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${res.poster_path})`;
+            } else {
+                console.error('Element with class .left_box not found');
+            }
+        } else {
+            console.error('Poster path is missing');
+        }
+    
+        let place = document.querySelector('.gig');
+        if (!place) {
+            console.error('Element with class .gig not found');
+        }
+    
+    
 
         place.innerHTML += `
             <div class="name_film">

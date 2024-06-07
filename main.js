@@ -2,7 +2,7 @@ import {
     createHeader,
     createFooter
 } from './modules/ui.js'
-let footer=document.querySelector('footer')
+let footer=document.querySelector('.footers')
 createFooter(footer)
 var movieScroll = document.getElementById("movie_scroll");
 var scrollMovie = document.querySelector(".scroll_movie");
@@ -275,11 +275,11 @@ function relPath(arr, place) {
     for (let item of arr) {
         // console.log(item);
         place.insertAdjacentHTML('beforeend', `
-    <a href="/pages/actor/index.html?id=${item.id}" class="elem" style="background-image: url(https://image.tmdb.org/t/p/original${item.profile_path});">
+    <a  href="/pages/actor/index.html?id=${item.id}" class="elem" style="background-image: url(https://image.tmdb.org/t/p/original${item.profile_path});">
     <p><b>${num++}<b/>-е место</p>
     <div class="dannie">
       <h3>${item.name}</h3>
-      <span>${item.known_for[0].name}</span>
+      <span>${item.name}</span>
       <p>57 лет</p>
     </div>
   </a>

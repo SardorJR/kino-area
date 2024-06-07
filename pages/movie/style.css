@@ -696,3 +696,49 @@ footer {
     }
   }
 }
+.foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-block: 30px;
+
+  p {
+    font-family: Qanelas;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 17.85px;
+    text-align: center;
+    color: #E3E6F0B8;
+    margin-block: 20px;
+  }
+
+  a {
+   
+      font-family: Qanelas;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 17.85px;
+      text-align: center;
+      color: #E3E6F0B8;
+    
+  }
+
+  .a_href {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding-block: 30px 0;
+
+    a {
+      font-family: Qanelas;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 21.06px;
+      text-align: left;
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+  }
+}
