@@ -1,5 +1,5 @@
-export function createHeader(place){
-    place.innerHTML+=`
+export function createHeader(place) {
+  place.innerHTML += `
     <div class="logo">
     <img src="/img/Логотип.png" alt="">
     <img src="/img/ддд.png" alt="">
@@ -20,10 +20,16 @@ export function createHeader(place){
     <button class="signin">Войти</button>
   </div>
     `
+  let logo = document.querySelector('.search')
+  let dialog = document.querySelector('dialog')
+  logo.onclick = () => {
+    dialog.showModal()
+  }
+
 }
 
-export function createFooter(place){
-  place.innerHTML+=`
+export function createFooter(place) {
+  place.innerHTML += `
   <footer>
         <img src="/public/img/Логотип (1).png" alt="">
         <h2>Подпишитесь на E-mail рассылку</h2>

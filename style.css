@@ -957,3 +957,57 @@ footer {
     }
   }
 }
+dialog {
+  width: 300px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background: linear-gradient(135deg, #f06, #f90);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  transform: translateX(200%) translateY(60%);
+  input.sear {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  button.poisk {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: #f06;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button.poisk:hover {
+    background-color: #f06;
+    color: white;
+  }
+  
+  button.close-dialog {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: #f06;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button.close-dialog:hover {
+    background-color: #f06;
+    color: white;
+  }
+}
+

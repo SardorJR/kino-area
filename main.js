@@ -2,7 +2,7 @@ import {
     createHeader,
     createFooter
 } from './modules/ui.js'
-let footer=document.querySelector('.footers')
+let footer = document.querySelector('.footers')
 createFooter(footer)
 var movieScroll = document.getElementById("movie_scroll");
 var scrollMovie = document.querySelector(".scroll_movie");
@@ -62,17 +62,17 @@ let iframe = document.querySelector('iframe')
 let showAll = false;
 let body = document.body
 let grids = document.querySelector('.grids')
-fetch('https://api.themoviedb.org/3/movie/now_playing', {
+fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc', {
     headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODAzYWUxZGEwOGU3M2RmM2ZjMTI2OGMzNTE2NWNjMiIsInN1YiI6IjY0MjdlZWY4OGE4OGIyMDBkNTMyOGQ1MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8WByVMOVhx2M7eo1SLPb3cPkt2NSfzLg53Afm1_dr-M`
     }
 })
     .then(res => res.json())
     .then(res => {
-     
+
         reload_2(res.results, scroll_movie, iframe);
         reload_now(res.results.slice(0, 8), grid);
-       
+
 
     })
 fetch('https://api.themoviedb.org/3/movie/upcoming?language=ru-RU', {
@@ -82,7 +82,7 @@ fetch('https://api.themoviedb.org/3/movie/upcoming?language=ru-RU', {
 })
     .then(res => res.json())
     .then(res => {
-        reload_now(res.results.slice(0,4), grids);
+        reload_now(res.results.slice(0, 4), grids);
     })
 
 
@@ -370,3 +370,30 @@ yearLinks.forEach(link => {
         audio.play()
     });
 });
+
+
+let sear = document.querySelector('.sear')
+let poisk=document.querySelector('.close-dialog')
+let dialog=document.querySelector('dialog')
+sear.onkeyup = (e) => {
+    const key_word = e.target.value.trim().toLowerCase();
+    fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc', {
+        headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODAzYWUxZGEwOGU3M2RmM2ZjMTI2OGMzNTE2NWNjMiIsInN1YiI6IjY0MjdlZWY4OGE4OGIyMDBkNTMyOGQ1MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8WByVMOVhx2M7eo1SLPb3cPkt2NSfzLg53Afm1_dr-M`
+        }
+    })
+        .then(res => res.json())
+        .then(res => {
+            
+            const filteredMovies = res.results.filter(movie => {
+                const title = movie.title.toLowerCase();
+                console.log(title);
+                return title.includes(key_word);
+            })
+            reload_now(filteredMovies, grid); 
+        })
+}
+
+poisk.onclick=()=>{
+    dialog.close()
+}
